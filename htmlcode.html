@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Price Tracker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Crypto Price Tracker</h1>
+            <div class="preferences">
+                <select id="sort-select">
+                    <option value="market-cap">Sort by Market Cap</option>
+                    <option value="price-asc">Price: Low to High</option>
+                    <option value="price-desc">Price: High to Low</option>
+                    <option value="24h-change">24h Change</option>
+                </select>
+                
+            </div>
+        </header>
+
+        <main>
+            <section class="crypto-listing">
+                <h2>Cryptocurrency List</h2>
+                <div id="crypto-list" class="grid-list">
+                    <!-- Cryptocurrencies will be dynamically populated here -->
+                </div>
+            </section>
+
+            <section class="comparison-section">
+                <h2>Comparison (Max 5 Currencies)</h2>
+                <div id="comparison-grid" class="comparison-grid">
+                    <!-- Compared cryptocurrencies will appear here -->
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>Data provided by CoinGecko API</p>
+            <p>Last Updated: <span id="last-updated">-</span></p>
+        </footer>
+    </div>
+
+    <script src="./app.js"></script>
+</body>
+</html>

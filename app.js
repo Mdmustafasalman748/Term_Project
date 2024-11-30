@@ -307,7 +307,7 @@ class CryptoTracker {
 
     initializeEventListeners() {
         document.getElementById('sort-select').addEventListener('change', this.handleSorting.bind(this));
-
+        document.getElementById('favorites-checkbox').addEventListener('change',this.handleFavoritesFilter.bind(this));
     }
 
     handleSorting(event) {
@@ -340,8 +340,29 @@ class CryptoTracker {
     }
 
     handleFavoritesFilter(event) {
-        // Implement favorites filter logic
+        // When the checkbox is toggled, re-render the currency list
         console.log('Show favorites:', event.target.checked);
+        this.renderCurrencyList(currencies); // Re-render to apply the filter
+    }
+
+    saveComparedCurrencies() {
+        localStorage.setItem('comparedCurrencies', JSON.stringify([...this.comparedCurrencies]));
+    }
+
+    saveFavorites() {
+        localStorage.setItem('favorites', JSON.stringify([...this.favorites]));
+    }
+
+    loadSavedPreferences() {
+        const savedCurrencies = JSON.parse(localStorage.getItem('comparedCurrencies') || '[]');
+        savedCurrencies.forEach(cryptoId => this.comparedCurrencies.add(cryptoId));
+
+        const savedFavorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+        savedFavorites.forEach(cryptoId => this.favorites.add(cryptoId));
+
+        if (this.comparedCurrencies.size > 0) {
+            this.updateComparisonSection();
+        }
     }
 
     saveComparedCurrencies() {
@@ -355,7 +376,9 @@ class CryptoTracker {
         if (this.comparedCurrencies.size > 0) {
             this.updateComparisonSection();
         }
+        this.renderCurrencyList(currencies);
     }
+    
 }
 
 const cryptoTracker = new CryptoTracker();
